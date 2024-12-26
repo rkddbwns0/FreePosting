@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Nav from './Nav';
 import useFetchUser from './useFetchUser';
 import { useNavigate } from 'react-router-dom';
 
 function MyPage() {
     const { user } = useFetchUser();
-    const navigation = useNavigate();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!user) {
+            alert('로그인을 해 주세요.');
+            navigate('/login');
+        }
+    });
 
     return (
         <div>

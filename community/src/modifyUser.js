@@ -29,6 +29,7 @@ function ModifyUser() {
     const logout = async () => {
         try {
             const response = await axios.post('http://localhost:8080/userdb/logout', {}, { withCredentials: true });
+            navigate('/login');
         } catch (error) {
             console.error(error);
         }
@@ -38,6 +39,7 @@ function ModifyUser() {
         try {
             if (password === '' && user[0]?.nickname === nickname) {
                 alert('변경할 정보를 입력해 주세요.');
+                return false;
             }
             const response = await axios.post(
                 `${SERVER_ADDRESS}/userdb/modifyInfo`,
@@ -47,8 +49,9 @@ function ModifyUser() {
                 },
                 { withCredentials: true }
             );
-            if (password) {
-                alert('비밀번호가 변경되었습니다.');
+            if (response.status === 200) {
+                alert('정보가 변경되었습니다. 다시 로그인해 주세요.');
+                logout();
             }
         } catch (error) {
             console.error(error);
@@ -58,6 +61,9 @@ function ModifyUser() {
     useEffect(() => {
         if (user) {
             setNickname(user[0]?.nickname);
+        } else {
+            alert('로그인을 해 주세요.');
+            navigate('/login');
         }
     }, [user]);
 

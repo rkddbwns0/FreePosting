@@ -150,6 +150,14 @@ router.post('/modifyInfo', checkToken, (req, res) => {
                 if (error) {
                     console.error(error);
                 }
+                console.log(result);
+                if (password === null && nickname === null) {
+                    res.status(400).json({ success: false });
+                } else if (result.length > 0) {
+                    res.status(400).json({ success: false });
+                } else {
+                    res.status(200).json({ success: true });
+                }
             });
         } catch (error) {
             console.error(error);

@@ -42,7 +42,7 @@ function Nav({ user }) {
                 <div className="title">
                     <strong className="title-text" href="/">
                         <a className="title-a" href="/">
-                            HarmonyHub
+                            FreePosting
                         </a>
                     </strong>
                     <div className="main-top-nav">
